@@ -1,6 +1,6 @@
 # vless-sample
 
-Ультра простой варинт настройки XTLS-Reality. Опробирован на Debian 11 на [VDS от iHor за 240 рублей (1 СPU/768 MB RAM/7 GB SSD)](https://www.ihor-hosting.ru/?from=180121). Полет отличный.
+Ультра простой варинт настройки XTLS-Reality. Опробирован на Debian 11 на [VDS от iHor за 240 рублей (1 СPU/768 MB RAM/7 GB SSD) и Европейский IP](https://www.ihor-hosting.ru/?from=180121). Полет отличный.
 
 ```
 wget https://github.com/XTLS/Xray-core/releases/download/v1.8.1/Xray-linux-64.zip
