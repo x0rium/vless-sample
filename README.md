@@ -1,6 +1,17 @@
 # vless-sample
 
-Ультра простой варинт настройки XTLS-Reality. Опробирован на Debian 11 на [VDS от iHor за 240 рублей (1 СPU/768 MB RAM/7 GB SSD) с Европейским IP](https://www.ihor-hosting.ru/?from=180121). Полет отличный.
+Ультра простой варинт настройки VLESS, XTLS-Reality + XTLS-Vision. 
+
+Опробирован на Debian 11 на [VDS от iHor за 240 рублей (1 СPU/768 MB RAM/7 GB SSD) с Европейским IP](https://www.ihor-hosting.ru/?from=180121). Полет отличный.
+
+Преимущества, буду краток:
+- беспалевный
+- легковесный
+- нет двойного/тройного шифрования
+- поддерживается большим колчисетвом софта
+
+
+## Настройка
 
 ```
 wget https://github.com/XTLS/Xray-core/releases/download/v1.8.1/Xray-linux-64.zip
@@ -55,7 +66,11 @@ openssl rand -hex 8
 
 nano /opt/xray/config.json
 ````
-Пихаем в него 
+Пихаем в него, И не забудем поправить : 
+- id
+- privateKey
+- shortIds
+
 
 ```JSON
 {
@@ -118,12 +133,28 @@ ystemctl restart xray
 journalctl -u xray
 ```
 
-Смотрим что все стартануло без ошибоу, должно быть что-то вроде 
+Убеждаемся что нет ошибок, должно быть что-то вроде 
 ```
 Aug 11 19:10:55 vds123.my-ihor.ru xray[77589]: 2023/08/11 19:10:55 [Info] infra/conf/serial: Reading config: /opt/xray/config.json
 Aug 11 19:10:55 vds123.my-ihor.ru xray[77589]: 2023/08/11 19:10:55 [Info] transport/internet/tcp: listening TCP on 0.0.0.0:443
 Aug 11 19:10:55 vds123.my-ihor.ru xray[77589]: 2023/08/11 19:10:55 [Warning] core: Xray 1.8.1 started
 ```
+
+## Клиенты
+
+
+Во всех клиентах настройка +- одна и та же: 
+- указываем ip адрес
+- порт (443)
+- протокол VLESS
+- включен XTLS
+- выбран TCP траснпорт (он же None),
+- UUID - он у нас сохранен ( вывод команды `/opt/xray/xray uuid`)
+- Public Key  из (`/opt/xray/xray x25519`)
+- ShortID из (`openssl rand -hex 8`) 
+
+Если есть вариант врубить UDP Relay и TCP Fast Open, то врубаем оба.
+
 
 
 Для ios:
@@ -145,10 +176,11 @@ Aug 11 19:10:55 vds123.my-ihor.ru xray[77589]: 2023/08/11 19:10:55 [Warning] cor
 Для MacOS:
 - [V2RayXS](https://github.com/tzmax/V2RayXS)
 
-Reference:
+## Reference:
 
+- [XRay](https://github.com/XTLS/Xray-core)
 - [Документация проекта Xray](https://xtls.github.io/en/)
-- [Bleeding-edge обход блокировок с полной маскировкой: настраиваем сервер и клиент XRay с XTLS-Reality быстро и просто]https://habr.com/ru/articles/731608/
+- [Bleeding-edge обход блокировок с полной маскировкой: настраиваем сервер и клиент XRay с XTLS-Reality быстро и просто](https://habr.com/ru/articles/731608/)
 - [Интернет-цензура и обход блокировок: не время расслабляться](https://habr.com/ru/articles/710980/)
 - [active probbing или как китайский файрволл палит твои VPN сервисы](https://ensa.fi/active-probing/)
 - [Крутой ресерч большого китайского файрволла](https://ensa.fi/active-probing/imc2015.pdf)
