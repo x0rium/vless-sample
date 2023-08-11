@@ -1,6 +1,6 @@
 # vless-sample
 
-Ультра простой варинт настройки XTLS-Reality. Опробирован на Debian 11 на [VDS от iHor за 240 рублей (1 СPU/768 MB RAM/7 GB SSD) и Европейский IP](https://www.ihor-hosting.ru/?from=180121). Полет отличный.
+Ультра простой варинт настройки XTLS-Reality. Опробирован на Debian 11 на [VDS от iHor за 240 рублей (1 СPU/768 MB RAM/7 GB SSD) с Европейским IP](https://www.ihor-hosting.ru/?from=180121). Полет отличный.
 
 ```
 wget https://github.com/XTLS/Xray-core/releases/download/v1.8.1/Xray-linux-64.zip
@@ -117,17 +117,39 @@ ystemctl restart xray
 
 journalctl -u xray
 ```
-Смотрим что все стартануло 
+
+Смотрим что все стартануло без ошибоу, должно быть что-то вроде 
+```
+Aug 11 19:10:55 vds123.my-ihor.ru xray[77589]: 2023/08/11 19:10:55 [Info] infra/conf/serial: Reading config: /opt/xray/config.json
+Aug 11 19:10:55 vds123.my-ihor.ru xray[77589]: 2023/08/11 19:10:55 [Info] transport/internet/tcp: listening TCP on 0.0.0.0:443
+Aug 11 19:10:55 vds123.my-ihor.ru xray[77589]: 2023/08/11 19:10:55 [Warning] core: Xray 1.8.1 started
+```
 
 
-Для ios самый крутой клиент shadowrocket
+Для ios:
+- самый крутой клиент shadowrocket, хоть и стоит 3$
 
+Для Linux/Windows:
+- [nekoray](https://github.com/MatsuriDayo/nekoray)
+- [sing-box](https://sing-box.sagernet.org/)
 
+Для openwrt:
+- [luci-app-xray](https://github.com/yichya/luci-app-xray)
+- [openwrt-passwall](https://github.com/xiaorouji/openwrt-passwall)
+- [luci-app-vssr](https://github.com/jerrykuku/luci-app-vssr)
+- [helloworld](https://github.com/fw876/helloworld)
+
+Для Android:
+- [v2rayNG](https://github.com/2dust/v2rayNG)
+
+Для MacOS:
+- [V2RayXS](https://github.com/tzmax/V2RayXS)
 
 Reference:
 
-- https://habr.com/ru/articles/731608/
-- https://habr.com/ru/articles/710980/
-- https://ensa.fi/active-probing/
-- https://ensa.fi/active-probing/imc2015.pdf
+- [Документация проекта Xray](https://xtls.github.io/en/)
+- [Bleeding-edge обход блокировок с полной маскировкой: настраиваем сервер и клиент XRay с XTLS-Reality быстро и просто]https://habr.com/ru/articles/731608/
+- [Интернет-цензура и обход блокировок: не время расслабляться](https://habr.com/ru/articles/710980/)
+- [active probbing или как китайский файрволл палит твои VPN сервисы](https://ensa.fi/active-probing/)
+- [Крутой ресерч большого китайского файрволла](https://ensa.fi/active-probing/imc2015.pdf)
 
